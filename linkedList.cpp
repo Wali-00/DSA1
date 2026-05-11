@@ -86,6 +86,59 @@ void printList() {
     cout << "NULL" << endl;
 }
 
+//delete a node from head
+void deleteAtHead(){
+    if(head == NULL){ //if the linked list is empty, return
+        cout << "Linked list is empty." << endl;
+        return;
+    }
+    Node* temp = head; //store the current head in a temporary variable
+    head = head->next; //update the head to the next node
+    delete temp; //deallocate memory for the old head
+}
+
+//delete a node from tail
+void deleteAtTail(){
+    if(head == NULL){ //if the linked list is empty, return
+        cout << "Linked list is empty." << endl;
+        return;
+    }
+    if(head->next == NULL){ //if there is only one node in the linked list, delete it and set head to null
+        delete head;
+        head = NULL;
+        return;
+    }
+    Node* temp = head; //start from the head of the linked list
+    while(temp->next->next != NULL){ //traverse to the second last node of the linked list
+        temp = temp->next;
+    }
+    delete temp->next; //deallocate memory for the last node
+    temp->next = NULL; //set the next of the second last node to null
+}
+
+//delete a node from a specific position in the linked list
+void deleteAtPosition(int position){
+    if(head == NULL){ //if the linked list is empty, return
+        cout << "Linked list is empty." << endl;
+        return;
+    }
+    if(head->data == position){ //if the head node's data matches the position, delete the head node
+        deleteAtHead();
+        return;
+    }
+    Node* temp = head; //start from the head of the linked list
+    while(temp->next != NULL){ //traverse the linked list to find the position
+        if(temp->next->data == position){ //if the next node's data matches the position
+            Node* nodeToDelete = temp->next; //store the node to be deleted in a temporary variable
+            temp->next = temp->next->next; //point the next of the current node to the next of the node to be deleted
+            delete nodeToDelete; //deallocate memory for the node to be deleted
+            return;
+        }
+        temp = temp->next; //move to the next node
+    }
+    cout << "Position not found in the linked list." << endl;
+}
+
 int main(){
    
 
