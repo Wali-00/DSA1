@@ -10,18 +10,16 @@ struct Node{
 Node *head = NULL; //initialize the head of the linked list to null
 
 //create a function to create a new node
-void createNode(int data){
+Node* createNode(int data){
     Node *newNode=new Node();//dynamically allocate memory for a new node
     newNode->data=data;//assign the data to the new node
     newNode->next=NULL;//initialize the next pointer to null
-    
+    return newNode;
 }
 
 //function to insert a new node at the first position of the linked list
 void insertAtHead(int data){
-    Node *newNode=new Node;//create a new node with the given data
-    newNode->data=data;
-    newNode->next=NULL;
+    Node *newNode=createNode(data);//create a new node with the given data
     if(head==NULL){ //if the linked list is empty, make the new node the head
         head=newNode;
         return;
@@ -32,9 +30,7 @@ void insertAtHead(int data){
 
 //function to insert a new node at the end of the linked list
 void insertAtTail(int data){
-    Node *newNode=new Node;//create a new node with the given data
-    newNode->data=data;
-    newNode->next=NULL;
+    Node *newNode=createNode(data);//create a new node with the given data
     if(head==NULL){ //if the linked list is empty, make the new node the head
         head=newNode;
         return;
